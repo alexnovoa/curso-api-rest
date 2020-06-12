@@ -8,6 +8,7 @@ public interface CategoriaRepository extends JpaRepository<Categoria, Integer>{
     
     Categoria findByDescripcion(String descripcion);
 
+    Categoria findById(int id);
 
     @Query("SELECT c FROM Categoria c WHERE descripcion = ?1")
     Categoria getByDescripcion(String descripcion);

@@ -7,7 +7,6 @@ import com.curso.spring.api.models.Pedido;
 import com.curso.spring.api.repositories.DetalleRepository;
 import com.curso.spring.api.repositories.PedidoRepository;
 import com.curso.spring.api.services.PedidoService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,20 +22,13 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Override
     @Transactional
-    public Pedido save(Pedido pedido, List<Detalle> detalles) {       
+    public Pedido save(Pedido pedido, List<Detalle> detalles) {      
         
         Pedido pedidoGuardado = pedidoRepository.save(pedido);
-
-
         for(Detalle tmp : detalles){
-
             tmp.setPedido(pedidoGuardado);
-
             detalleRepository.save(tmp);
-
-
         }
-
         return null;
     }    
     

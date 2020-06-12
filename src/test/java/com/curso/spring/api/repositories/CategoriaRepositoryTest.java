@@ -22,7 +22,7 @@ public class CategoriaRepositoryTest {
         categoria.setId(9);
         categoria.setDescripcion("VERDURAS");  
         categoria = categoriaRepository.save(categoria);
-        Categoria categoriaExistente = categoriaRepository.findById(9).get();
+        Categoria categoriaExistente = categoriaRepository.findById(9);
         Assert.assertEquals(categoria, categoriaExistente);   
         
     }
