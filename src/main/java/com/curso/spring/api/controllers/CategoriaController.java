@@ -1,14 +1,14 @@
 package com.curso.spring.api.controllers;
 
-import java.lang.StackWalker.Option;
 import java.util.List;
-import java.util.Optional;
 import com.curso.spring.api.models.Categoria;
 import com.curso.spring.api.repositories.CategoriaRepository;
 import com.curso.spring.api.response.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,13 +21,16 @@ public class CategoriaController {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    @Autowired
+    private BCryptPasswordEncoder bcrypt;
+
     @GetMapping("/saludar/{nombre}")
     public String saludar(@PathVariable String nombre) {
         return "HOLA "+nombre;
     }
 
 
-    @GetMapping("/categorias/{id}")
+    @GetMapping("/categorias/{id}")   
     public ResponseEntity<Response<Categoria>> getCategoriaPorId(@PathVariable int id){
         Response<Categoria> response = new Response<>();  
         Categoria categoria = categoriaRepository.findById(id);     
@@ -40,10 +43,11 @@ public class CategoriaController {
     }
 
 
-    @GetMapping("/categorias")
+    @GetMapping("/categorias")   
     public List<Categoria> getCategoria(){
-        List<Categoria> categorias = categoriaRepository.findAll();
+        List<Categoria> categorias = categoriaRepository.findAll();        
         return categorias;
+      
     }
 
 
